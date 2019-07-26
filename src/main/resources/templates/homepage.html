@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <th:block th:fragment="importBS">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=EB+Garamond&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+    </th:block>
+
+    <!--<link rel="stylesheet" type="text/css" href="/homepageDecor.css">-->
+    <title>Listing Subjects and Courses</title>
+
+</head>
+
+<body>
+
+<!--<th:block th:fragment="importNavBar">-->
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+<!--<a class="navbar-brand" href="/">Home</a>-->
+<!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"-->
+<!--aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--<span class="navbar-toggler-icon"></span>-->
+<!--</button>-->
+<!--<div class="collapse navbar-collapse" id="navbarNavDropdown">-->
+<!--<ul class="navbar-nav">-->
+<!--<li class="nav-item active">-->
+<!--<a class="nav-link" href="/addsubject">Add a Subject <span class="sr-only">(current)</span></a>-->
+<!--</li>-->
+<!--<li class="nav-item active">-->
+<!--<a class="nav-link" href="/add">Add a Course<span class="sr-only">(current)</span></a>-->
+<!--</li>-->
+
+<!---->
+<!--</ul>-->
+<!--</div>-->
+<!--</nav>-->
+<!--</th:block>-->
+
+<div th:replace="base :: nav"></div>
+<h1 class="introTitle">Courses According To Subjects</h1>
+
+
+<div class="container">
+
+    <div th:each="subject:${subjects}">
+        <h3> Subject Name: <span th:text="${subject.subjectName}"></span>
+        </h3>
+
+        <h5 th:text="${#lists.size(subject.courses)>0}?'Courses List':'No Course(s) To Show'"></h5>
+        <div class="card-group">
+
+            <div class="card" th:each="course:${subject.courses}">
+
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${course.title}"
+                        th:value="${course.id}"></h5>
+                    <p class="card-text" th:text="${course.instructor}"
+                       th:value="${course.id}"></p>
+                    <p class="card-text" th:text="${course.description}"
+                       th:value="${course.id}"></p>
+                    <p class="card-text" th:text="${course.credit}"
+                       th:value="${course.id}"></p>
+                    <!--These two do not work yet-->
+                    <!--<a th:href="@{/update/{id} (id=${course.id})}">Update</a>-->
+                    <a th:href="@{/detail/course/{id} (id=${course.id})}">View This Course</a>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <a th:href="@{/detail/{id} (id=${subject.id})}">View All Courses of This Subject</a>
+            <!--<a th:href="@{/delete/{id} (id=${eachCar.id})}">Delete</a>-->
+        </div>
+        <br>
+
+        <!--<a th:href="@{/update/{id} (id=${eachCar.id})}">Update</a>-->
+
+    </div>
+    <hr>
+    <br>
+
+</div>
+
+</body>
+</html>

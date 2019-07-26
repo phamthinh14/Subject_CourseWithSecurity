@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Subject</title>
+</head>
+<body>
+<div th:replace="base :: nav"></div>
+<form action="#"
+      method="post"
+      th:action="@{/processsubject}" th:object="${subject}">
+
+    <input th:field="*{id}" type="hidden"/>
+
+
+    SubjectName:<input th:field="*{subjectName}" type="text"/>
+
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

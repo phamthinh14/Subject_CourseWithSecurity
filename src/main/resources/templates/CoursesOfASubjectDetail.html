@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="/homepage :: importBS">...</th:block>
+    <title>Courses of A Subject Detail</title>
+</head>
+<body>
+<div th:replace="base :: nav"></div>
+<!--<a href="/"></a>-->
+
+<div class="jumbotron">
+
+    <h5 th:text="${subjects.subjectName}"></h5>
+
+    <h3 th:text="${#lists.size(subjects.courses)>0}?'List of Courses':'No Courses To Show'"></h3>
+
+    <div th:each="eachCourse:${subjects.courses}">
+
+        <p th:text="${eachCourse.title}"
+           th:value="${eachCourse.id}"></p>
+
+        <p th:text="${eachCourse.instructor}"
+           th:value="${eachCourse.id}"></p>
+
+        <p th:text="${eachCourse.description}"
+           th:value="${eachCourse.id}"></p>
+
+        <p th:text="${eachCourse.credit}"
+           th:value="${eachCourse.id}"></p>
+        <!--Delete one car does not work yet-->
+        <!--<a th:href="@{/}">Delete this car</a>-->
+    </div>
+</div>
+
+
+</body>
+</html>
